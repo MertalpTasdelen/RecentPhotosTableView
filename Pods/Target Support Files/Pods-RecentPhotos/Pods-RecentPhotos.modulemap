@@ -1,0 +1,6 @@
+framework module Pods_RecentPhotos {
+  umbrella header "Pods-RecentPhotos-umbrella.h"
+
+  export *
+  module * { export * }
+}
