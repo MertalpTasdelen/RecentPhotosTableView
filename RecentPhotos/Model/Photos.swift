@@ -40,7 +40,7 @@ class Photos {
     func downloadPhotos() {
             let baseURL = "https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=04be207f74301107ecb9ab3ff64a0599&extras=date_upload&page=\(pageCounter)&per_page=20&format=json&nojsoncallback=1"
         pageCounter += 1
-        print(baseURL)
+//        print(baseURL)
     
         Alamofire.request(baseURL, method: .get).responseJSON{
             response in

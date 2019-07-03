@@ -37,13 +37,6 @@ class MainViewController: UITableViewController, PhotosDownloadDelegate {
             self.photoArray.sort(by: {$0.uploadedDay > $1.uploadedDay})
             self.tableView.reloadData()
         }
-        
-//        DispatchQueue.main.async {
-//            for item in self.photoArray {
-//                self.titles.append(item.title)
-//                self.tableView.reloadData()
-//            }
-//        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -66,7 +59,7 @@ class MainViewController: UITableViewController, PhotosDownloadDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            print(photoArray.count)
+//            print(photoArray.count)
             return photoArray.count
         } else if section == 1 && isLoadMore {
             return 1
@@ -84,32 +77,25 @@ class MainViewController: UITableViewController, PhotosDownloadDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = view.frame.height
-//        print("offsetY: \(offsetY) --- contentHeight: \(contentHeight) -- scrollView.frame.height: \(scrollView.frame.height)")
-
-        if offsetY > contentHeight - scrollView.frame.height{
-            if !isLoadMore{
-                print("Entered ")
-                loadNewPhotos()
-            }
-
-        }
-    }
-    
     func loadNewPhotos() {
         isLoadMore = true
-        print("print fetching")
-////        print("Load new Photos")
-        DispatchQueue.main.async {
+        print("Download new 20 photos")
+        DispatchQueue.main.async{
             self.photosModel.downloadPhotos()
-            self.tableView.reloadData()
-//            self.isLoadMore = false
+            self.isLoadMore = false
         }
-
     }
     
-
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastElement = photoArray.count - 5
+        if indexPath.row == lastElement {
+            print(photoArray.count)
+            loadNewPhotos()
+        }
+    }
+    
+    
     
 }
+
+

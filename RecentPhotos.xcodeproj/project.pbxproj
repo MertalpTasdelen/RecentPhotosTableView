@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B19D6F2326568984A752592B /* Pods_RecentPhotos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3855C57D978CAAC5EFD3CEC /* Pods_RecentPhotos.framework */; };
 		BB5586DE22C585B100D45D9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5586DD22C585B100D45D9A /* AppDelegate.swift */; };
-		BB5586E022C585B100D45D9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5586DF22C585B100D45D9A /* ViewController.swift */; };
 		BB5586E322C585B100D45D9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB5586E122C585B100D45D9A /* Main.storyboard */; };
 		BB5586E522C585B200D45D9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB5586E422C585B200D45D9A /* Assets.xcassets */; };
 		BB5586E822C585B200D45D9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB5586E622C585B200D45D9A /* LaunchScreen.storyboard */; };
@@ -24,7 +23,6 @@
 /* Begin PBXFileReference section */
 		BB5586DA22C585B100D45D9A /* RecentPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecentPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5586DD22C585B100D45D9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BB5586DF22C585B100D45D9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BB5586E222C585B100D45D9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BB5586E422C585B200D45D9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB5586E722C585B200D45D9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				BB5586DD22C585B100D45D9A /* AppDelegate.swift */,
-				BB5586DF22C585B100D45D9A /* ViewController.swift */,
 				BB83ACD622CA8F4900C09ED9 /* MainViewController.swift */,
 				BB83ACCE22C9EB1400C09ED9 /* DetailViewController.swift */,
 			);
@@ -256,7 +253,6 @@
 				BB83ACD722CA8F4900C09ED9 /* MainViewController.swift in Sources */,
 				BB83ACD422CA8D6500C09ED9 /* LoadingCell.swift in Sources */,
 				BB5586F022C5870200D45D9A /* Photo.swift in Sources */,
-				BB5586E022C585B100D45D9A /* ViewController.swift in Sources */,
 				BB83ACCF22C9EB1400C09ED9 /* DetailViewController.swift in Sources */,
 				BB5586DE22C585B100D45D9A /* AppDelegate.swift in Sources */,
 				BB84528B22C92BC9006F524D /* Photos.swift in Sources */,
@@ -409,6 +405,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J93C36GZ6U;
 				INFOPLIST_FILE = RecentPhotos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -428,6 +425,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J93C36GZ6U;
 				INFOPLIST_FILE = RecentPhotos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
