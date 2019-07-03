@@ -13,7 +13,7 @@ class MainViewController: UITableViewController, PhotosDownloadDelegate {
     
     var photosModel = Photos()
     
-    var urlAndTitles = [String: String]()
+    var photoArray = [Photos]()
     var titles = [String]()
     
     var titleCounter = 1
@@ -31,15 +31,19 @@ class MainViewController: UITableViewController, PhotosDownloadDelegate {
         
     }
     
-    func downloadPhotosArray(urlWithTitle: [String : String]) {
-        urlAndTitles = urlWithTitle
-//        print("urltitleset")
+    func downloadPhotosArray(arrayOf photos: [Photos]) {
+        photoArray = photos
         DispatchQueue.main.async {
-            for item in self.urlAndTitles.keys {
-                self.titles.append(item)
-                self.tableView.reloadData()
-            }
+            self.photoArray.sort(by: {$0.uploadedDay > $1.uploadedDay})
+            self.tableView.reloadData()
         }
+        
+//        DispatchQueue.main.async {
+//            for item in self.photoArray {
+//                self.titles.append(item.title)
+//                self.tableView.reloadData()
+//            }
+//        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -49,7 +53,7 @@ class MainViewController: UITableViewController, PhotosDownloadDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "systemCell", for: indexPath)
-            cell.textLabel?.text = titles[indexPath.row]
+            cell.textLabel?.text = photoArray[indexPath.row].title
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath) as! LoadingCell
@@ -62,7 +66,8 @@ class MainViewController: UITableViewController, PhotosDownloadDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return titles.count
+            print(photoArray.count)
+            return photoArray.count
         } else if section == 1 && isLoadMore {
             return 1
         }
@@ -73,27 +78,34 @@ class MainViewController: UITableViewController, PhotosDownloadDelegate {
 //        print(titles[indexPath.row])
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        vc.imageUrl = urlAndTitles[titles[indexPath.row]]!
+        let url = photoArray[indexPath.row].getPhotoSourceURL(photo: photoArray[indexPath.row])
+        vc.imageUrl = url
+        vc.dateUpload = photoArray[indexPath.row].uploadedDay
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
+        let contentHeight = view.frame.height
+//        print("offsetY: \(offsetY) --- contentHeight: \(contentHeight) -- scrollView.frame.height: \(scrollView.frame.height)")
 
-        if offsetY > contentHeight - scrollView.frame.height * 1.2  {
-            if !isLoadMore {
+        if offsetY > contentHeight - scrollView.frame.height{
+            if !isLoadMore{
+                print("Entered ")
                 loadNewPhotos()
             }
+
         }
     }
     
     func loadNewPhotos() {
         isLoadMore = true
-        print("Load new Photos")
+        print("print fetching")
+////        print("Load new Photos")
         DispatchQueue.main.async {
-            self.isLoadMore = false
             self.photosModel.downloadPhotos()
+            self.tableView.reloadData()
+//            self.isLoadMore = false
         }
 
     }

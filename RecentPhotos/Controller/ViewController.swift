@@ -10,6 +10,11 @@ import UIKit
 
 class ViewController: UITableViewController, PhotosDownloadDelegate {
     
+    func downloadPhotosArray(arrayOf photos: [Photos]) {
+        //
+    }
+    
+    
     var isLoadMore = false
     var imageArray = [UIImage]()
     var images = [String]()

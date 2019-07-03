@@ -12,11 +12,13 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var image: UIImageView!
     var selectedImage = UIImage()
     var imageUrl: String = "nil"
+    var dateUpload: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(imageUrl)
+//        print(imageUrl)
         downloadPhoto()
+        print(dateUpload)
     }
     
 

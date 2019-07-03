@@ -114,8 +114,8 @@
 			children = (
 				BB5586DD22C585B100D45D9A /* AppDelegate.swift */,
 				BB5586DF22C585B100D45D9A /* ViewController.swift */,
-				BB83ACCE22C9EB1400C09ED9 /* DetailViewController.swift */,
 				BB83ACD622CA8F4900C09ED9 /* MainViewController.swift */,
+				BB83ACCE22C9EB1400C09ED9 /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

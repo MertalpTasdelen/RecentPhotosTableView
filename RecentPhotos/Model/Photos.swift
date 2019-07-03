@@ -11,12 +11,13 @@ import Alamofire
 import SwiftyJSON
 
 protocol PhotosDownloadDelegate {
-    func downloadPhotosArray(urlWithTitle: [String:String])
+    func downloadPhotosArray(arrayOf photos: [Photos])
 }
 
 class Photos {
     
     var titleCounter = 1
+    var pageCounter = 1
     
     var delegate: PhotosDownloadDelegate?
     var photoBulk = [Photos]()
@@ -37,7 +38,8 @@ class Photos {
     }
     
     func downloadPhotos() {
-            let baseURL = "https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=04be207f74301107ecb9ab3ff64a0599&extras=date_upload&page=1&per_page=20&format=json&nojsoncallback=1"
+            let baseURL = "https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=04be207f74301107ecb9ab3ff64a0599&extras=date_upload&page=\(pageCounter)&per_page=20&format=json&nojsoncallback=1"
+        pageCounter += 1
         print(baseURL)
     
         Alamofire.request(baseURL, method: .get).responseJSON{
@@ -53,7 +55,6 @@ class Photos {
     }
     
     func decodeJson(json: JSON){
-//        var photoBulk = [Photos]()
         
         let status = json["stat"].stringValue
         if status == "fail" {
@@ -73,15 +74,14 @@ class Photos {
                 if newPhoto.title == "" { newPhoto.title = "There is no title \(titleCounter)"
                     titleCounter += 1
                 }
-//                imageUrlArray.append(newPhoto.getPhotoSourceURL(photo: newPhoto))
-//                photoBulk.append(newPhoto)
+                photoBulk.append(newPhoto)
                 urlTitle["\(newPhoto.title)"] = "\(newPhoto.getPhotoSourceURL(photo: newPhoto))"
                 
             }
             
         }
         DispatchQueue.main.async {
-            self.delegate?.downloadPhotosArray(urlWithTitle: self.urlTitle)
+            self.delegate?.downloadPhotosArray(arrayOf: self.photoBulk)
         }
       
     }
